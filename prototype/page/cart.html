@@ -16,7 +16,40 @@
       margin: 0;
       padding: 0;
     }
-
+/* 微信小程序顶部导航栏样式 */
+.wx-navbar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .wx-navbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #000;
+      text-align: left;
+      left: 10px;
+      flex: 1;
+    }
+    
+    .wx-navbar-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .wx-navbar-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
     .status-bar {
       height: 44px;
       background-color: white;
@@ -177,6 +210,19 @@
       </svg>
     </div>
   </div>
+
+  <!-- 添加微信小程序顶部导航栏 -->
+<div class="wx-navbar">
+  <div class="wx-navbar-title">合强鞋材</div>
+  <div class="wx-navbar-actions">
+    <div class="wx-navbar-btn">
+      <i data-lucide="target" class="w-5 h-5"></i>
+    </div>
+    <div class="wx-navbar-btn">
+      <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+    </div>
+  </div>
+</div>
 
   <div class="pb-52"> <!-- 增加底部padding，为底部标签栏和操作栏留出更多空间 -->
     <!-- 页面标题 -->

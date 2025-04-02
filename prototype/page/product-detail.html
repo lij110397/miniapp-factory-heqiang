@@ -221,7 +221,40 @@
       min-height: 80px;
       resize: none;
     }
-    
+    /* 微信小程序顶部导航栏样式 */
+.wx-navbar {
+  height: 44px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.wx-navbar-title {
+  font-size: 17px;
+  font-weight: 500;
+  color: #000;
+  text-align: left;
+  left: 10px;
+  flex: 1;
+}
+
+.wx-navbar-actions {
+  display: flex;
+  align-items: center;
+}
+
+.wx-navbar-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+}
     .modal-footer {
       display: flex;
       justify-content: space-between;
@@ -257,17 +290,30 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
     </div>
   </div>
-  
+
+  <!-- 添加微信小程序顶部导航栏 -->
+<div class="wx-navbar">
+  <div class="wx-navbar-title">合强鞋材</div>
+  <div class="wx-navbar-actions">
+    <div class="wx-navbar-btn">
+      <i data-lucide="target" class="w-5 h-5"></i>
+    </div>
+    <div class="wx-navbar-btn">
+      <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+    </div>
+  </div>
+</div>
+
   <div class="pb-32">
     <!-- 返回按钮 -->
-    <div class="absolute top-14 left-4 z-10">
+    <div class="absolute top-24 left-4 z-10">
       <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white">
         <i data-lucide="chevron-left" class="w-6 h-6"></i>
       </button>
     </div>
     
     <!-- 分享按钮 -->
-    <div class="absolute top-14 right-4 z-10">
+    <div class="absolute top-24 right-4 z-10">
       <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white">
         <i data-lucide="share" class="w-5 h-5"></i>
       </button>
