@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登录注册 - 皮革鞋材工厂小程序</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../design-system/colors.css" rel="stylesheet">
+  <link href="../design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .status-bar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .bottom-bar {
+      height: 34px;
+      background-color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+    
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary-600);
+      box-shadow: 0 0 0 2px rgba(var(--primary-600-rgb), 0.2);
+    }
+    
+    .login-button {
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .wechat-button {
+      background-color: #07C160;
+      color: white;
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 24px 0;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: #e5e7eb;
+    }
+    
+    .divider-text {
+      padding: 0 16px;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    
+    .tab-container {
+      display: flex;
+      border-bottom: 1px solid #e5e7eb;
+      margin-bottom: 24px;
+    }
+    
+    .tab {
+      flex: 1;
+      text-align: center;
+      padding: 12px 0;
+      font-weight: 500;
+      color: #6b7280;
+      position: relative;
+    }
+    
+    .tab.active {
+      color: var(--primary-600);
+    }
+    
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 25%;
+      width: 50%;
+      height: 2px;
+      background-color: var(--primary-600);
+    }
+    
+    .tab-content {
+      display: none;
+    }
+    
+    .tab-content.active {
+      display: block;
+    }
+    
+    .nav-header {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .back-button {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #374151;
+    }
+    
+    .page-title {
+      flex: 1;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+    </div>
+  </div>
+  
+  <div class="nav-header">
+    <button class="back-button">
+      <i data-lucide="chevron-left" class="w-6 h-6"></i>
+    </button>
+    <div class="page-title">登录/注册</div>
+    <div class="w-8"></div>
+  </div>
+  
+  <div class="p-6">
+    <div class="mb-8">
+      <img src="https://via.placeholder.com/120x40?text=Logo" alt="Logo" class="mx-auto mb-4">
+      <h1 class="text-2xl font-bold text-center text-gray-800">皮革鞋材工厂</h1>
+      <p class="text-center text-gray-500 mt-2">登录后体验更多功能</p>
+    </div>
+    
+    <div class="tab-container">
+      <div class="tab active" data-tab="login">登录</div>
+      <div class="tab" data-tab="register">注册</div>
+    </div>
+    
+    <!-- 登录表单 -->
+    <div class="tab-content active" id="login-content">
+      <div class="form-group">
+        <label class="form-label">手机号码</label>
+        <input type="tel" class="form-input" placeholder="请输入手机号码">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">密码</label>
+        <input type="password" class="form-input" placeholder="请输入密码">
+      </div>
+      
+      <div class="flex justify-between mb-6">
+        <div class="flex items-center">
+          <input type="checkbox" id="remember" class="mr-2">
+          <label for="remember" class="text-sm text-gray-600">记住我</label>
+        </div>
+        <a href="#" class="text-sm text-primary-600">忘记密码？</a>
+      </div>
+      
+      <button class="login-button bg-primary-600 text-white mb-4">登录</button>
+      
+      <div class="divider">
+        <span class="divider-text">或</span>
+      </div>
+      
+      <button class="wechat-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+          <path d="M8.686 13.991c-1.173 0-2.12-.957-2.12-2.129 0-1.173.947-2.129 2.12-2.129 1.172 0 2.12.956 2.12 2.129 0 1.172-.948 2.129-2.12 2.129zm6.628 0c-1.172 0-2.12-.957-2.12-2.129 0-1.173.948-2.129 2.12-2.129s2.12.956 2.12 2.129c0 1.172-.948 2.129-2.12 2.129zm-8.3-7.13C4.843 8.179 3 10.214 3 12.861c0 1.494.769 2.839 1.975 3.801L4.34 19.82l2.531-1.273c.893.246 1.861.384 2.878.384 4.163 0 7.531-2.86 7.531-6.391 0-3.527-3.368-6.387-7.531-6.387-.983 0-1.93.14-2.803.384l-2.382-1.182.517 2.235c-1.06.906-1.696 2.143-1.696 3.513z"/>
+        </svg>
+        微信一键登录
+      </button>
+    </div>
+    
+    <!-- 注册表单 -->
+    <div class="tab-content" id="register-content">
+      <div class="form-group">
+        <label class="form-label">手机号码</label>
+        <input type="tel" class="form-input" placeholder="请输入手机号码">
+      </div>
+      
+      <div class="form-group">
+        <div class="flex justify-between items-center mb-1">
+          <label class="form-label mb-0">验证码</label>
+          <button class="text-sm text-primary-600">获取验证码</button>
+        </div>
+        <input type="text" class="form-input" placeholder="请输入验证码">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">设置密码</label>
+        <input type="password" class="form-input" placeholder="请设置密码">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">确认密码</label>
+        <input type="password" class="form-input" placeholder="请再次输入密码">
+      </div>
+      
+      <div class="flex items-center mb-6">
+        <input type="checkbox" id="agree" class="mr-2">
+        <label for="agree" class="text-sm text-gray-600">我已阅读并同意<a href="#" class="text-primary-600">用户协议</a>和<a href="#" class="text-primary-600">隐私政策</a></label>
+      </div>
+      
+      <button class="login-button bg-primary-600 text-white mb-4">注册</button>
+      
+      <div class="divider">
+        <span class="divider-text">或</span>
+      </div>
+      
+      <button class="wechat-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2">
+          <path d="M8.686 13.991c-1.173 0-2.12-.957-2.12-2.129 0-1.173.947-2.129 2.12-2.129 1.172 0 2.12.956 2.12 2.129 0 1.172-.948 2.129-2.12 2.129zm6.628 0c-1.172 0-2.12-.957-2.12-2.129 0-1.173.948-2.129 2.12-2.129s2.12.956 2.12 2.129c0 1.172-.948 2.129-2.12 2.129zm-8.3-7.13C4.843 8.179 3 10.214 3 12.861c0 1.494.769 2.839 1.975 3.801L4.34 19.82l2.531-1.273c.893.246 1.861.384 2.878.384 4.163 0 7.531-2.86 7.531-6.391 0-3.527-3.368-6.387-7.531-6.387-.983 0-1.93.14-2.803.384l-2.382-1.182.517 2.235c-1.06.906-1.696 2.143-1.696 3.513z"/>
+        </svg>
+        微信一键注册
+      </button>
+    </div>
+  </div>
+  
+  <div class="bottom-bar">
+    <div class="home-indicator"></div>
+  </div>
+  
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+    
+    // 返回按钮点击事件
+    document.querySelector('.back-button').addEventListener('click', function() {
+      window.history.back();
+    });
+    
+    // 标签切换
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // 移除所有标签的active类
+        tabs.forEach(t => t.classList.remove('active'));
+        // 给当前点击的标签添加active类
+        this.classList.add('active');
+        
+        // 隐藏所有内容
+        document.querySelectorAll('.tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // 显示对应的内容
+        const tabName = this.getAttribute('data-tab');
+        document.getElementById(`${tabName}-content`).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
