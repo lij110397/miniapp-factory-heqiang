@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>皮革鞋材工厂小程序 - 框架组件</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="design-system/colors.css" rel="stylesheet">
+  <link href="design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    .phone-frame {
+      width: 390px;
+      height: 844px;
+      border-radius: 44px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 14px solid #111;
+      background-color: #111;
+    }
+    
+    .status-bar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .bottom-bar {
+      height: 34px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+    
+    .tab-bar {
+      height: 83px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      position: absolute;
+      bottom: 34px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      color: #6b7280;
+    }
+    
+    .tab-item.active {
+      color: var(--primary-600);
+    }
+    
+    .tab-item i {
+      margin-bottom: 4px;
+    }
+    
+    .loading-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+    }
+    
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--primary-200);
+      border-top: 4px solid var(--primary-600);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .toast {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 100;
+    }
+    
+    .modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    
+    .modal-content {
+      width: 80%;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .modal-header {
+      padding: 16px;
+      border-bottom: 1px solid #e5e7eb;
+      font-weight: 600;
+    }
+    
+    .modal-body {
+      padding: 16px;
+    }
+    
+    .modal-footer {
+      padding: 12px 16px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-600);
+      color: white;
+    }
+    
+    .btn-outline {
+      border: 1px solid #d1d5db;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold mb-6">皮革鞋材工厂小程序 - 框架组件</h1>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- 标签栏 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">底部标签栏</h2>
+      <div class="phone-frame">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+          </div>
+        </span>
+        <div class="flex-1 bg-white p-4">
+          <div class="text-center text-lg font-medium">页面内容区域</div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab-item active">
+            <i data-lucide="home" width="24" height="24"></i>
+            <span>首页</span>
+          </div>
+          <div class="tab-item">
+            <i data-lucide="grid" width="24" height="24"></i>
+            <span>分类</span>
+          </div>
+          <div class="tab-item">
+            <i data-lucide="shopping-bag" width="24" height="24"></i>
+            <span>产品</span>
+          </div>
+          <div class="tab-item">
+            <i data-lucide="shopping-cart" width="24" height="24"></i>
+            <span>采购车</span>
+          </div>
+          <div class="tab-item">
+            <i data-lucide="user" width="24" height="24"></i>
+            <span>我的</span>
+          </div>
+        </div>
+        <div class="bottom-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 加载状态 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">加载状态</h2>
+      <div class="phone-frame">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+          </div>
+        </div>
+        <div class="flex-1 bg-white p-4">
+          <div class="text-center text-lg font-medium">页面内容区域</div>
+        </div>
+        <div class="loading-container">
+          <div class="loading-spinner"></div>
+        </div>
+        <div class="bottom-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 提示框 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">提示框</h2>
+      <div class="phone-frame">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+          </div>
+        </div>
+        <div class="flex-1 bg-white p-4">
+          <div class="text-center text-lg font-medium">页面内容区域</div>
+        </div>
+        <div class="toast">
+          已加入采购车
+        </div>
+        <div class="bottom-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 弹窗 -->
+    <div>
+      <h2 class="text-lg font-semibold mb-4">弹窗</h2>
+      <div class="phone-frame">
+        <div class="status-bar">
+          <span>9:41</span>
+          <div class="flex items-center space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+          </div>
+        </div>
+        <div class="flex-1 bg-white p-4">
+          <div class="text-center text-lg font-medium">页面内容区域</div>
+        </div>
+        <div class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              确认发送询盘
+            </div>
+            <div class="modal-body">
+              您确定要将选中的3个产品发送询盘吗？
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-outline">取消</button>
+              <button class="btn btn-primary">确认</button>
+            </div>
+          </div>
+        </div>
+        <div class="bottom-bar">
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+  </script>
+</body>
+</html>

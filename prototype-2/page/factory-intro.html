@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工厂介绍 - 皮革鞋材工厂小程序</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../design-system/colors.css" rel="stylesheet">
+  <link href="../design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #1A1A1A; /* 深色背景 */
+      margin: 0;
+      padding: 0;
+      color: #fff; /* 白色文本 */
+    }
+    
+    .status-bar {
+      height: 44px;
+      background-color: #1A1A1A; /* 深色背景 */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff; /* 白色文本 */
+    }
+    
+    .bottom-bar {
+      height: 34px;
+      background-color: #1A1A1A; /* 深色背景 */
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+    
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #999; /* 灰色指示器 */
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+    
+    .factory-image {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #E8A87C; /* 橙色调 */
+      margin-bottom: 12px;
+      padding-left: 10px;
+      border-left: 3px solid #E8A87C; /* 橙色调 */
+    }
+    
+    .factory-stat {
+      background-color: #252525; /* 深灰色背景 */
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* 更深的阴影 */
+      text-align: center;
+    }
+    
+    .factory-stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      color: #E8A87C; /* 橙色调 */
+      margin-bottom: 4px;
+    }
+    
+    .factory-stat-label {
+      font-size: 12px;
+      color: #999; /* 灰色文本 */
+    }
+    
+    /* 微信小程序顶部导航栏样式 */
+    .wx-navbar {
+      height: 44px;
+      background-color: #1A1A1A; /* 深色背景 */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+      border-bottom: 1px solid #333; /* 深色边框 */
+    }
+
+    .wx-navbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #fff; /* 白色文本 */
+      text-align: left;
+      left: 10px;
+      flex: 1;
+    }
+
+    .wx-navbar-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .wx-navbar-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      color: #fff; /* 白色图标 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 状态栏 -->
+  <div class="status-bar">
+    <div>9:41</div>
+    <div class="flex">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+        <path d="M18 10a6 6 0 0 0-12 0v8h12v-8z"></path>
+        <path d="M22 18H2"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1">
+        <path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"></path>
+        <path d="M17 5H7"></path>
+        <path d="M17 9H7"></path>
+        <path d="M17 13H7"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 6v16h-6v-6H7v6H1V6l11-6 11 6z"></path>
+      </svg>
+    </div>
+  </div>
+  
+  <!-- 添加微信小程序顶部导航栏 -->
+  <div class="wx-navbar">
+    <div class="wx-navbar-title">合强鞋材</div>
+    <div class="wx-navbar-actions">
+      <div class="wx-navbar-btn">
+        <i data-lucide="target" class="w-5 h-5"></i>
+      </div>
+      <div class="wx-navbar-btn">
+        <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 导航栏 -->
+  <div class="bg-[#252525] p-4 flex items-center">
+    <button onclick="history.back()" class="mr-4 text-white">
+      <i data-lucide="chevron-left" class="w-6 h-6"></i>
+    </button>
+    <h1 class="text-lg font-medium flex-1 text-center text-white">工厂介绍</h1>
+    <div class="w-6"></div>
+  </div>
+
+  <!-- 内容区域 -->
+  <div class="pb-24">
+    <!-- 工厂封面图 -->
+    <div class="factory-image" style="background-image: url('../assets/images/equipment.png')"></div>
+
+    <!-- 工厂简介 -->
+    <div class="p-4">
+      <h2 class="section-title">公司简介</h2>
+      <div class="bg-[#252525] rounded-lg p-4 shadow-sm">
+        <p class="text-gray-300 text-sm leading-relaxed">
+          合强鞋材成立于2005年，是一家专业从事皮革鞋材研发、生产和销售的现代化企业。公司位于广东省东莞市，占地面积5000平方米，拥有现代化生产车间和先进的生产设备。
+        </p>
+        <p class="text-gray-300 text-sm leading-relaxed mt-2">
+          我们致力于为全球鞋类制造商提供高品质的皮革材料，产品远销欧美、东南亚等地区，与多家国际知名品牌建立了长期稳定的合作关系。
+        </p>
+      </div>
+    </div>
+
+    <!-- 工厂数据 -->
+    <div class="p-4">
+      <h2 class="section-title">工厂数据</h2>
+      <div class="grid grid-cols-3 gap-3">
+        <div class="factory-stat">
+          <div class="factory-stat-number">18</div>
+          <div class="factory-stat-label">年行业经验</div>
+        </div>
+        <div class="factory-stat">
+          <div class="factory-stat-number">5000</div>
+          <div class="factory-stat-label">平方米厂房</div>
+        </div>
+        <div class="factory-stat">
+          <div class="factory-stat-number">200+</div>
+          <div class="factory-stat-label">合作客户</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 生产设备 -->
+    <div class="p-4">
+      <h2 class="section-title">生产设备</h2>
+      <div class="bg-[#252525] rounded-lg overflow-hidden shadow-sm">
+        <div class="factory-image" style="background-image: url('../assets/images/纹样定制.jpg'); height: 150px;"></div>
+        <div class="p-4">
+          <h3 class="text-base font-medium mb-2 text-white">现代化生产线</h3>
+          <p class="text-sm text-gray-300">
+            公司引进了德国、意大利等国家的先进设备，包括自动裁剪机、压花机、喷涂线等，确保产品质量稳定可靠。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 质量控制 -->
+    <div class="p-4">
+      <h2 class="section-title">质量控制</h2>
+      <div class="bg-[#252525] rounded-lg overflow-hidden shadow-sm">
+        <div class="factory-image" style="background-image: url('../assets/images/quality.png'); height: 150px;"></div>
+        <div class="p-4">
+          <h3 class="text-base font-medium mb-2 text-white">严格的质量管理</h3>
+          <p class="text-sm text-gray-300">
+            我们建立了完善的质量管理体系，从原材料采购到成品出厂，每一个环节都有严格的检验标准，确保产品符合国际标准。
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 企业文化 -->
+    <div class="p-4">
+      <h2 class="section-title">企业文化</h2>
+      <div class="bg-[#252525] rounded-lg p-4 shadow-sm">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 rounded-full bg-[#333] flex items-center justify-center mr-3">
+            <i data-lucide="eye" class="w-4 h-4 text-[#E8A87C]"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-white">企业愿景</h3>
+            <p class="text-xs text-gray-400">成为全球领先的皮革鞋材供应商</p>
+          </div>
+        </div>
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 rounded-full bg-[#333] flex items-center justify-center mr-3">
+            <i data-lucide="target" class="w-4 h-4 text-[#E8A87C]"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-white">企业使命</h3>
+            <p class="text-xs text-gray-400">为客户提供高品质、环保的皮革材料</p>
+          </div>
+        </div>
+        <div class="flex items-center">
+          <div class="w-8 h-8 rounded-full bg-[#333] flex items-center justify-center mr-3">
+            <i data-lucide="heart" class="w-4 h-4 text-[#E8A87C]"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-white">核心价值观</h3>
+            <p class="text-xs text-gray-400">诚信、创新、品质、共赢</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部栏 -->
+  <div class="bottom-bar">
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
