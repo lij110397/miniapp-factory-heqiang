@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首页 - 皮革鞋材工厂小程序</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../design-system/colors.css" rel="stylesheet">
+  <link href="../design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .status-bar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .tab-bar {
+      height: 83px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      position: fixed;
+      bottom: 34px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      color: #6b7280;
+    }
+    
+    .tab-item.active {
+      color: var(--primary-600);
+    }
+    
+    .tab-item i {
+      margin-bottom: 4px;
+    }
+    
+    .bottom-bar {
+      height: 34px;
+      background-color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+    
+    .swiper {
+      position: relative;
+      overflow: hidden;
+      height: 400px;
+      border-radius: 12px;
+    }
+    
+    .swiper-pagination {
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+    
+    .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+    }
+    
+    .swiper-pagination-bullet-active {
+      background-color: white;
+      width: 12px;
+      border-radius: 3px;
+    }
+    
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20%;
+    }
+    
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      background-color: var(--primary-100);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 8px;
+      color: var(--primary-600);
+    }
+    
+    .product-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .product-image {
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--neutral-800);
+    }
+    
+    .section-more {
+      font-size: 14px;
+      color: var(--primary-600);
+      display: flex;
+      align-items: center;
+    }
+    
+    .factory-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .factory-image {
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    /* 微信小程序顶部导航栏样式 */
+    .wx-navbar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .wx-navbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #000;
+      text-align: left;
+      left: 10px;
+      flex: 1;
+    }
+    
+    .wx-navbar-actions {
+      display: flex;
+      align-items: center;
+    }
+    
+    .wx-navbar-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10a6 6 0 0 0-12 0v11h12z"></path><path d="M9 2v1"></path><path d="M15 2v1"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762"></path><path d="m14 8-6 6"></path><path d="m10 8-2 2"></path></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="2" rx="2"></rect><rect width="18" height="7" x="3" y="15" rx="2"></rect><path d="M7 15v-2"></path><path d="M17 15v-2"></path><path d="M7 7v2"></path><path d="M17 7v2"></path></svg>
+    </div>
+  </div>
+  
+  <!-- 添加微信小程序顶部导航栏 -->
+  <div class="wx-navbar">
+    <div class="wx-navbar-title">合强鞋材</div>
+    <div class="wx-navbar-actions">
+      <div class="wx-navbar-btn">
+        <i data-lucide="target" class="w-5 h-5"></i>
+      </div>
+      <div class="wx-navbar-btn">
+        <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+      </div>
+    </div>
+  </div>
+  
+  <div class="pb-32">
+    <!-- 搜索栏 -->
+    <div class="bg-white p-4 sticky top-0 z-10">
+      <div class="flex items-center bg-gray-100 rounded-full px-4 py-2">
+        <i data-lucide="search" class="w-5 h-5 text-gray-400 mr-2"></i>
+        <span class="text-gray-400">Search Materials</span>
+      </div>
+    </div>
+    
+    <!-- 轮播图 -->
+    <div class="p-4">
+      <div class="swiper" id="homeSwiper">
+        <div class="swiper-wrapper" style="position: relative; height: 100%;">
+          <img src="../assets/images/1.jpg" alt="工厂展示" class="w-full h-full object-cover swiper-slide active" style="position: absolute; top: 0; left: 0; opacity: 1; transition: opacity 0.5s ease;">
+          <img src="../assets/images/2.png" alt="产品展示" class="w-full h-full object-cover swiper-slide" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease;">
+          <img src="../assets/images/纹样定制.jpg" alt="设备展示" class="w-full h-full object-cover swiper-slide" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease;">
+        </div>
+        <div class="swiper-pagination">
+          <div class="swiper-pagination-bullet swiper-pagination-bullet-active"></div>
+          <div class="swiper-pagination-bullet"></div>
+          <div class="swiper-pagination-bullet"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 产品分类 -->
+    <div class="bg-white p-4 mb-4">
+      <div class="flex justify-between flex-wrap">
+        <div class="category-item">
+          <div class="category-icon">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xs">Cow Skin</span>
+        </div>
+        <div class="category-item">
+          <div class="category-icon">
+            <i data-lucide="square" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xs">Split</span>
+        </div>
+        <div class="category-item">
+          <div class="category-icon">
+            <i data-lucide="circle" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xs">Embossed</span>
+        </div>
+        <div class="category-item">
+          <div class="category-icon">
+            <i data-lucide="hexagon" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xs">Suede</span>
+        </div>
+        <div class="category-item">
+          <div class="category-icon">
+            <i data-lucide="grid" class="w-5 h-5"></i>
+          </div>
+          <span class="text-xs">More</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 最新产品 -->
+    <div class="p-4 mb-4">
+      <div class="section-header">
+        <h2 class="section-title">New Products</h2>
+        <a href="#" class="section-more">
+          View More
+          <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-4">
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('../assets/images/new_products/5.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium mb-1">Italian Imported Top Layer Cowhide</h3>
+            <p class="text-xs text-gray-500 mb-2">Premium quality, soft touch</p>
+            <div class="flex items-center">
+              <div class="flex">
+                <div class="w-3 h-3 rounded-full bg-yellow-800 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-red-800 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-gray-800"></div>
+              </div>
+              <div class="text-xs text-primary-600 ml-auto">3 colors</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('../assets/images/new_products/6.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium mb-1">Premium Suede Cowhide</h3>
+            <p class="text-xs text-gray-500 mb-2">Fine suede texture, durable</p>
+            <div class="flex items-center">
+              <div class="flex">
+                <div class="w-3 h-3 rounded-full bg-gray-700 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-blue-900 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-green-800"></div>
+              </div>
+              <div class="text-xs text-primary-600 ml-auto">5 colors</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('../assets/images/new_products/7.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium mb-1">Embossed Calfskin</h3>
+            <p class="text-xs text-gray-500 mb-2">Exquisite embossing, premium texture</p>
+            <div class="flex items-center">
+              <div class="flex">
+                <div class="w-3 h-3 rounded-full bg-red-900 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-700 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-black"></div>
+              </div>
+              <div class="text-xs text-primary-600 ml-auto">4 colors</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="product-card">
+          <div class="product-image" style="background-image: url('../assets/images/new_products/8.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium mb-1">Imported Split Leather</h3>
+            <p class="text-xs text-gray-500 mb-2">Flexible, durable, cost-effective</p>
+            <div class="flex items-center">
+              <div class="flex">
+                <div class="w-3 h-3 rounded-full bg-brown-800 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-gray-600 mr-1"></div>
+                <div class="w-3 h-3 rounded-full bg-black"></div>
+              </div>
+              <div class="text-xs text-primary-600 ml-auto">3 colors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 工厂环境 -->
+    <div class="p-4 mb-4">
+      <div class="section-header">
+        <h2 class="section-title">Factory Environment</h2>
+        <a href="factory-intro.html" class="section-more">
+          Learn More
+          <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+      
+      <div class="factory-card">
+        <div class="factory-image" style="background-image: url('../assets/images/纹样定制.jpg')"></div>
+        <div class="p-4">
+          <h3 class="text-base font-medium mb-2">Modern Production Equipment</h3>
+          <p class="text-sm text-gray-600">We have advanced leather processing equipment and technology, strictly controlling every aspect of the production process to ensure consistent and reliable product quality. The factory covers an area of 5,000 square meters with an annual production capacity of 2 million square feet.</p>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="factory-card">
+          <div class="factory-image" style="background-image: url('../assets/images/team.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium">Professional R&D Team</h3>
+          </div>
+        </div>
+        
+        <div class="factory-card">
+          <div class="factory-image" style="background-image: url('../assets/images/quality.png')"></div>
+          <div class="p-3">
+            <h3 class="text-sm font-medium">Quality Testing Center</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 热门产品 -->
+    <div class="p-4 mb-4">
+      <div class="section-header">
+        <h2 class="section-title">Popular Products</h2>
+        <a href="#" class="section-more">
+          View More
+          <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+      
+      <div class="overflow-x-auto">
+        <div class="flex space-x-4" style="width: max-content;">
+          <div class="product-card" style="width: 160px;">
+            <div class="product-image" style="background-image: url('../assets/images/products/1.png')"></div>
+            <div class="p-3">
+              <h3 class="text-sm font-medium mb-1">Smooth Top Layer Cowhide</h3>
+              <p class="text-xs text-gray-500">Classic style, bestseller</p>
+            </div>
+          </div>
+          
+          <div class="product-card" style="width: 160px;">
+            <div class="product-image" style="background-image: url('../assets/images/products/2.png')"></div>
+            <div class="p-3">
+              <h3 class="text-sm font-medium mb-1">Crocodile Embossed Leather</h3>
+              <p class="text-xs text-gray-500">Exquisite pattern, premium texture</p>
+            </div>
+          </div>
+          
+          <div class="product-card" style="width: 160px;">
+            <div class="product-image" style="background-image: url('../assets/images/products/3.png')"></div>
+            <div class="p-3">
+              <h3 class="text-sm font-medium mb-1">Imported Lambskin</h3>
+              <p class="text-xs text-gray-500">Soft and delicate, excellent feel</p>
+            </div>
+          </div>
+          
+          <div class="product-card" style="width: 160px;">
+            <div class="product-image" style="background-image: url('../assets/images/products/4.png')"></div>
+            <div class="p-3">
+              <h3 class="text-sm font-medium mb-1">Vegetable Tanned Leather</h3>
+              <p class="text-xs text-gray-500">Eco-friendly process, natural texture</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 客户评价 -->
+    <div class="p-4 mb-4">
+      <div class="section-header">
+        <h2 class="section-title">Customer Reviews</h2>
+        <a href="#" class="section-more">
+          More Reviews
+          <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+        </a>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 mb-3 shadow-sm">
+        <div class="flex items-center mb-3">
+          <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+            <i data-lucide="user" class="w-6 h-6 text-gray-500"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium">Mr. Zhang</h3>
+            <div class="flex text-yellow-400">
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600">The product quality is excellent, the leather is soft with a delicate feel, and the color is beautiful. It was a pleasant cooperation, and we will continue to purchase.</p>
+      </div>
+      
+      <div class="bg-white rounded-lg p-4 shadow-sm">
+        <div class="flex items-center mb-3">
+          <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+            <i data-lucide="user" class="w-6 h-6 text-gray-500"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium">Ms. Li</h3>
+            <div class="flex text-yellow-400">
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+              <i data-lucide="star" class="w-4 h-4"></i>
+            </div>
+          </div>
+        </div>
+        <p class="text-sm text-gray-600">The service is very attentive, the products meet our requirements, and delivery is on time. We hope to have more style options in the future.</p>
+      </div>
+    </div>
+    
+    <!-- 联系我们 -->
+    <div class="p-4 mb-4">
+      <div class="bg-white rounded-lg p-4 shadow-sm">
+        <h2 class="text-lg font-medium mb-3">Contact Us</h2>
+        <p class="text-sm text-gray-600 mb-4">If you are interested in our products, please feel free to contact us. We will provide you with professional service.</p>
+        
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+            <i data-lucide="phone" class="w-4 h-4 text-primary-600"></i>
+          </div>
+          <span class="text-sm">0769-88888888</span>
+        </div>
+        
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center mr-3">
+            <i data-lucide="mail" class="w-4 h-4 text-primary-600"></i>
+          </div>
+          <span class="text-sm">info@heqiang.com</span>
+        </div>
+        
+        <a href="contact.html" class="block w-full bg-primary-600 text-white text-center py-2 rounded-lg font-medium">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 底部标签栏 -->
+  <div class="tab-bar">
+    <div class="tab-item active">
+      <i data-lucide="home" class="w-6 h-6"></i>
+      <span>Home</span>
+    </div>
+    <div class="tab-item">
+      <i data-lucide="image" class="w-6 h-6"></i>
+      <span>Products</span>
+    </div>
+    <div class="tab-item">
+      <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+      <span>Cart</span>
+    </div>
+    <div class="tab-item">
+      <i data-lucide="user" class="w-6 h-6"></i>
+      <span>My Profile</span>
+    </div>
+  </div>
+  
+  <div class="bottom-bar">
+    <div class="home-indicator"></div>
+  </div>
+  
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+    
+    // 轮播图自动播放
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.swiper-slide');
+      const bullets = document.querySelectorAll('.swiper-pagination-bullet');
+      let currentIndex = 0;
+      
+      // 设置轮播图切换函数
+      function showSlide(index) {
+        // 隐藏所有幻灯片
+        slides.forEach(slide => {
+          slide.style.opacity = 0;
+          slide.classList.remove('active');
+        });
+        
+        // 移除所有指示器的激活状态
+        bullets.forEach(bullet => {
+          bullet.classList.remove('swiper-pagination-bullet-active');
+        });
+        
+        // 显示当前幻灯片
+        slides[index].style.opacity = 1;
+        slides[index].classList.add('active');
+        
+        // 激活当前指示器
+        bullets[index].classList.add('swiper-pagination-bullet-active');
+        
+        // 更新当前索引
+        currentIndex = index;
+      }
+      
+      // 自动播放
+      function autoPlay() {
+        let nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+      
+      // 点击指示器切换幻灯片
+      bullets.forEach((bullet, index) => {
+        bullet.addEventListener('click', () => {
+          showSlide(index);
+        });
+      });
+      
+      // 设置自动播放定时器，每3秒切换一次
+      const interval = setInterval(autoPlay, 3000);
+      
+      // 鼠标悬停时暂停自动播放
+      const swiper = document.getElementById('homeSwiper');
+      swiper.addEventListener('mouseenter', () => {
+        clearInterval(interval);
+      });
+      
+      // 鼠标离开时恢复自动播放
+      swiper.addEventListener('mouseleave', () => {
+        clearInterval(interval);
+        interval = setInterval(autoPlay, 3000);
+      });
+    });
+  </script>
+</body>
+</html>

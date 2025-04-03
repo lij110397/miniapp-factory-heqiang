@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品分类 - 皮革鞋材工厂小程序</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../design-system/colors.css" rel="stylesheet">
+  <link href="../design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 微信小程序顶部导航栏样式 */
+    .wx-navbar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .wx-navbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #000;
+      text-align: left;
+      left: 10px;
+      flex: 1;
+    }
+
+    .wx-navbar-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .wx-navbar-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
+
+    .status-bar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .tab-bar {
+      height: 83px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      position: fixed;
+      bottom: 34px;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .tab-item.active {
+      color: var(--primary-600);
+    }
+
+    .tab-item i {
+      margin-bottom: 4px;
+    }
+
+    .bottom-bar {
+      height: 34px;
+      background-color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+
+    .category-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .category-image {
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .category-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+    }
+
+    .category-title {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      color: white;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .category-count {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      color: white;
+      font-size: 12px;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 10a6 6 0 0 0-12 0v11h12z"></path>
+        <path d="M9 2v1"></path>
+        <path d="M15 2v1"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762">
+        </path>
+        <path d="m14 8-6 6"></path>
+        <path d="m10 8-2 2"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="11" x="3" y="2" rx="2"></rect>
+        <rect width="18" height="7" x="3" y="15" rx="2"></rect>
+        <path d="M7 15v-2"></path>
+        <path d="M17 15v-2"></path>
+        <path d="M7 7v2"></path>
+        <path d="M17 7v2"></path>
+      </svg>
+    </div>
+  </div>
+  <!-- 添加微信小程序顶部导航栏 -->
+  <div class="wx-navbar">
+    <div class="wx-navbar-title">合强鞋材</div>
+    <div class="wx-navbar-actions">
+      <div class="wx-navbar-btn">
+        <i data-lucide="target" class="w-5 h-5"></i>
+      </div>
+      <div class="wx-navbar-btn">
+        <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-32">
+    <!-- 页面标题 -->
+    <div class="bg-white p-4 sticky top-0 z-10 shadow-sm">
+      <h1 class="text-lg font-semibold text-center">CATALOG</h1>
+    </div>
+
+    <!-- 分类列表 -->
+    <div class="bg-white p-4 flex items-center">
+      <button onclick="history.back()" class="mr-4">
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+      <h1 class="text-lg font-medium flex-1 text-center">Product Categories</h1>
+      <div class="w-6"></div>
+    </div>
+
+    <!-- 分类列表 -->
+    <div class="p-4 grid grid-cols-2 gap-4">
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/1.png')">
+          <!-- 移除了overlay，使用圆角图片 -->
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Top Layer Cowhide</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Natural texture</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/2.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Suede Leather</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Soft texture</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/3.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Patent Leather</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Water Resistant</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/4.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Embossed Leather</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Fully Customizable</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/5.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Sheepskin</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Soft, lightweight and comfortable</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/6.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Vegetable Tanned</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Eco-friendly process, ages beautifully</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/7.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Synthetic Leather</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Affordable</p>
+        </div>
+      </div>
+
+      <div class="category-card" onclick="location.href='product-list.html'">
+        <div class="category-image rounded-lg" style="background-image: url('../assets/images/products/8.png')">
+        </div>
+        <div class="p-3">
+          <h3 class="text-sm font-medium text-gray-800 mb-1">Specialty Leather</h3>
+          <p class="text-xs text-gray-600 leading-relaxed">Unique treatments</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- 底部标签栏 -->
+  <div class="tab-bar">
+    <div class="tab-item">
+      <i data-lucide="home" class="w-6 h-6"></i>
+      <span>Home</span>
+    </div>
+    <div class="tab-item active">
+      <i data-lucide="image" class="w-6 h-6"></i>
+      <span>Products</span>
+    </div>
+    <div class="tab-item">
+      <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+      <span>Cart</span>
+    </div>
+    <div class="tab-item">
+      <i data-lucide="user" class="w-6 h-6"></i>
+      <span>Me</span>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const categoryCards = document.querySelectorAll('.category-card');
+
+      // 为每个分类卡片添加点击事件
+      categoryCards.forEach(card => {
+        card.addEventListener('click', function () {
+          // 获取分类ID
+          const categoryId = this.getAttribute('data-category-id');
+
+          // 向父页面发送导航消息
+          if (window.parent) {
+            window.parent.postMessage({
+              action: 'navigate',
+              target: `page/product-list.html?category=${categoryId}`
+            }, '*');
+
+            // 添加日志消息
+            window.parent.postMessage({
+              action: 'log',
+              message: `用户点击了"${this.querySelector('.category-title').textContent}"分类卡片`
+            }, '*');
+          } else {
+            // 如果没有父窗口，直接跳转
+            window.location.href = `product-list.html?category=${categoryId}`;
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

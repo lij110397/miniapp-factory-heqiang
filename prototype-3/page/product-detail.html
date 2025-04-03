@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>产品详情 - 皮革鞋材工厂小程序</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="../design-system/colors.css" rel="stylesheet">
+  <link href="../design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('product');
+
+      function loadProductDetail(productId) {
+        // 这里添加根据产品ID加载产品详情的逻辑
+        console.log(`加载产品ID为 ${productId} 的详情`);
+
+        // 示例：更新页面标题
+        const productName = getProductNameById(productId);
+        document.querySelector('.page-title').textContent = productName || '产品详情';
+      }
+
+      function getProductNameById(productId) {
+        // 这里添加根据产品ID获取产品名称的逻辑
+        const products = {
+          '1': '头层牛皮 - 黑色',
+          '2': '头层牛皮 - 棕色',
+          '3': '二层牛皮 - 黑色',
+          '4': '二层牛皮 - 棕色',
+          '5': '羊皮 - 黑色',
+          '6': '羊皮 - 棕色'
+        };
+        return products[productId];
+      }
+
+      function showError(message) {
+        // 显示错误信息
+        console.error(message);
+        alert(message);
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('product');
+
+
+      function loadProductDetail(productId) {
+        // 这里添加根据产品ID加载产品详情的逻辑
+        console.log(`加载产品ID为 ${productId} 的详情`);
+
+        // 示例：更新页面标题
+        const productName = getProductNameById(productId);
+        document.querySelector('.page-title').textContent = productName || '产品详情';
+      }
+
+      function getProductNameById(productId) {
+        // 这里添加根据产品ID获取产品名称的逻辑
+        const products = {
+          '1': '头层牛皮 - 黑色',
+          '2': '头层牛皮 - 棕色',
+          '3': '二层牛皮 - 黑色',
+          '4': '二层牛皮 - 棕色',
+          '5': '羊皮 - 黑色',
+          '6': '羊皮 - 棕色'
+        };
+        return products[productId];
+      }
+
+      function showError(message) {
+        // 显示错误信息
+        console.error(message);
+        alert(message);
+      }
+    });
+  </script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .status-bar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .bottom-bar {
+      height: 34px;
+      background-color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .home-indicator {
+      width: 134px;
+      height: 5px;
+      background-color: #000;
+      border-radius: 100px;
+      margin-top: 8px;
+    }
+
+    .product-gallery {
+      position: relative;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .gallery-nav {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .gallery-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .gallery-dot.active {
+      background-color: white;
+      width: 16px;
+      border-radius: 4px;
+    }
+
+    .color-option {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      margin-right: 12px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .color-option.active::after {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border: 2px solid var(--primary-600);
+      border-radius: 50%;
+    }
+
+    .action-bar {
+      position: fixed;
+      bottom: 34px;
+      left: 0;
+      right: 0;
+      background-color: white;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .action-button {
+      flex: 1;
+      height: 44px;
+      border-radius: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .action-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-right: 16px;
+      font-size: 10px;
+      color: #6b7280;
+    }
+
+    .spec-item {
+      display: flex;
+      margin-bottom: 12px;
+    }
+
+    .spec-label {
+      width: 80px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .spec-value {
+      flex: 1;
+      font-size: 14px;
+    }
+
+    /* 弹出窗口样式 */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 50;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .modal-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-container {
+      background-color: white;
+      border-radius: 16px 16px 0 0;
+      width: 100%;
+      max-height: 80vh;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 14px;
+      min-height: 80px;
+      resize: none;
+    }
+
+    /* 微信小程序顶部导航栏样式 */
+    .wx-navbar {
+      height: 44px;
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      position: relative;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .wx-navbar-title {
+      font-size: 17px;
+      font-weight: 500;
+      color: #000;
+      text-align: left;
+      left: 10px;
+      flex: 1;
+    }
+
+    .wx-navbar-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .wx-navbar-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal-button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .modal-button.cancel {
+      background-color: #f3f4f6;
+      color: #4b5563;
+      margin-right: 10px;
+    }
+
+    .modal-button.confirm {
+      background-color: var(--primary-600);
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="status-bar">
+    <span>9:41</span>
+    <div class="flex items-center space-x-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 10a6 6 0 0 0-12 0v11h12z"></path>
+        <path d="M9 2v1"></path>
+        <path d="M15 2v1"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M6.33 20.826A10.02 10.02 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.523-4.477 10-10 10a9.984 9.984 0 0 1-5.67-1.762">
+        </path>
+        <path d="m14 8-6 6"></path>
+        <path d="m10 8-2 2"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="11" x="3" y="2" rx="2"></rect>
+        <rect width="18" height="7" x="3" y="15" rx="2"></rect>
+        <path d="M7 15v-2"></path>
+        <path d="M17 15v-2"></path>
+        <path d="M7 7v2"></path>
+        <path d="M17 7v2"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 添加微信小程序顶部导航栏 -->
+  <div class="wx-navbar">
+    <div class="wx-navbar-title">合强鞋材</div>
+    <div class="wx-navbar-actions">
+      <div class="wx-navbar-btn">
+        <i data-lucide="target" class="w-5 h-5"></i>
+      </div>
+      <div class="wx-navbar-btn">
+        <i data-lucide="more-horizontal" class="w-5 h-5"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="pb-32">
+    <!-- 返回按钮 -->
+    <div class="absolute top-24 left-4 z-10">
+      <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white"
+        id="backButton">
+        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- 分享按钮 -->
+    <div class="absolute top-24 right-4 z-10">
+      <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white">
+        <i data-lucide="share" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- 产品图片展示 -->
+    <div class="product-gallery" style="background-image: url('../assets/images/products/9.png')">
+      <div class="gallery-nav">
+        <div class="gallery-dot active"></div>
+        <div class="gallery-dot"></div>
+        <div class="gallery-dot"></div>
+        <div class="gallery-dot"></div>
+      </div>
+    </div>
+
+    <!-- 产品信息 -->
+    <div class="bg-white p-4 mb-4">
+      <h1 class="text-xl font-semibold mb-2">Italian Imported Top Layer Cowhide</h1>
+      <p class="text-sm text-gray-500 mb-4">Premium top layer cowhide, soft touch, fine texture, suitable for high-end
+        shoe uppers</p>
+
+      <div class="mb-4">
+        <h3 class="text-sm font-medium mb-3">Color Options</h3>
+        <div class="flex">
+          <div class="color-option active text-black flex items-center justify-center style=" background-color: white;">
+            All</div>
+          <div class="color-option " style="background-color: #8B4513;"></div>
+          <div class="color-option" style="background-color: #3A3A3A;"></div>
+          <div class="color-option" style="background-color: #800000;"></div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-sm text-gray-500">Item No.:</span>
+          <span class="text-sm">TL-2023-001</span>
+        </div>
+        <div>
+          <span class="text-sm text-gray-500">Stock:</span>
+          <span class="text-sm">Sufficient</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 产品规格 -->
+    <div class="bg-white p-4 mb-4">
+      <h2 class="text-base font-medium mb-3">Product Specifications</h2>
+
+      <div class="spec-item">
+        <div class="spec-label">Material</div>
+        <div class="spec-value">Top Layer Cowhide</div>
+      </div>
+
+      <div class="spec-item">
+        <div class="spec-label">Thickness</div>
+        <div class="spec-value">1.2-1.4mm</div>
+      </div>
+
+      <div class="spec-item">
+        <div class="spec-label">Size</div>
+        <div class="spec-value">Standard Size (approx. 2.2-2.4㎡/piece)</div>
+      </div>
+
+      <div class="spec-item">
+        <div class="spec-label">Origin</div>
+        <div class="spec-value">Italy</div>
+      </div>
+
+      <div class="spec-item">
+        <div class="spec-label">Application</div>
+        <div class="spec-value">High-end shoe uppers, bags, leather goods</div>
+      </div>
+    </div>
+
+    <!-- 产品详情 -->
+    <div class="bg-white p-4 mb-4">
+      <h2 class="text-base font-medium mb-3">Product Details</h2>
+
+      <p class="text-sm text-gray-600 mb-3">
+        This product uses Italian imported premium top layer cowhide, processed with fine tanning techniques. The leather is soft, with natural texture and delicate touch. It has excellent breathability and wear resistance, suitable for high-end shoe uppers, bags and leather goods.
+      </p>
+
+      <p class="text-sm text-gray-600 mb-3">
+        Features:
+        - Fine texture, soft touch
+        - Natural grain with layered appearance
+        - Good breathability, high comfort
+        - Wear-resistant and durable
+        - Even dyeing, good colorfastness
+      </p>
+
+      <div class="grid grid-cols-2 gap-2 mt-4">
+        <img src="../assets/images/products/1.jpeg" alt="Product details" class="rounded-lg">
+        <img src="../assets/images/products/2.jpeg" alt="Product details" class="rounded-lg">
+        <img src="../assets/images/products/3.jpeg" alt="Product details" class="rounded-lg">
+        <img src="../assets/images/products/4.jpeg" alt="Product details" class="rounded-lg">
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部操作栏 -->
+  <div class="fixed bottom-[34px] left-0 right-0 bg-white border-t border-gray-200 p-3 flex items-center" style="z-index: 9999; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); width: 100%;">
+    <div class="flex-1 flex items-center">
+      <button class="w-10 h-10 flex flex-col items-center justify-center text-gray-500 mr-4">
+        <i data-lucide="heart" class="w-5 h-5"></i>
+        <span class="text-xs">Favorite</span>
+      </button>
+      <button class="w-10 h-10 flex flex-col items-center justify-center text-gray-500">
+        <i data-lucide="share-2" class="w-5 h-5"></i>
+        <span class="text-xs">Share</span>
+      </button>
+    </div>
+    <div class="flex">
+      <button class="bg-white border border-primary-600 text-primary-600 rounded-l-full px-4 py-2 text-sm font-medium" id="addToCartBtn">
+        Add to Cart
+      </button>
+      <button class="bg-primary-600 text-white rounded-r-full px-4 py-2 text-sm font-medium">
+        Inquire Now
+      </button>
+    </div>
+  </div>
+
+  <!-- 加入采购车弹窗 -->
+  <div id="cartModal" class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="text-lg font-medium">Add to Cart</h3>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-content">
+        <div class="form-group">
+          <label class="form-label">Purchase Quantity</label>
+          <input type="number" class="form-input" placeholder="Please enter purchase quantity" min="1" value="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Notes</label>
+          <textarea class="form-textarea" placeholder="Example: Need samples, inquire about MOQ, etc."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-button cancel" id="cancelModal">Cancel</button>
+        <button class="modal-button confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-bar" style="z-index: 1;">
+    <div class="home-indicator"></div>
+  </div>
+
+  <script>
+    // 初始化 Lucide 图标
+    lucide.createIcons();
+
+    // 弹窗控制
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const closeModal = document.getElementById('closeModal');
+    const cancelModal = document.getElementById('cancelModal');
+
+    addToCartBtn.addEventListener('click', function () {
+      cartModal.classList.add('active');
+    });
+
+    function hideModal() {
+      cartModal.classList.remove('active');
+    }
+
+    closeModal.addEventListener('click', hideModal);
+    cancelModal.addEventListener('click', hideModal);
+
+    // 点击弹窗外部关闭弹窗
+    cartModal.addEventListener('click', function (e) {
+      if (e.target === cartModal) {
+        hideModal();
+      }
+    });
+    // 添加返回按钮点击事件
+    const backButton = document.getElementById('backButton');
+    backButton.addEventListener('click', function () {
+      // 向父页面发送返回消息
+      if (window.parent) {
+        window.parent.postMessage({
+          action: 'navigate',
+          target: 'page/product-list.html'
+        }, '*');
+
+        // 添加日志消息
+        window.parent.postMessage({
+          action: 'log',
+          message: '用户点击返回按钮，返回产品列表'
+        }, '*');
+      } else {
+        // 如果没有父窗口，直接跳转
+        window.location.href = 'product-list.html';
+      }
+    });
+  </script>
+</body>
+
+</html>
