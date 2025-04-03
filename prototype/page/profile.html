@@ -340,3 +340,51 @@
   </script>
 </body>
 </html>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取工厂介绍和联系我们菜单项
+    const factoryIntroItem = document.querySelector('.menu-item:nth-child(4)');
+    const contactItem = document.querySelector('.menu-item:nth-child(5)');
+
+    // 工厂介绍点击事件
+    factoryIntroItem.addEventListener('click', function() {
+      // 向父页面发送导航消息
+      if (window.parent) {
+        window.parent.postMessage({
+          action: 'navigate',
+          target: 'page/factory-intro.html'
+        }, '*');
+        
+        // 添加日志消息
+        window.parent.postMessage({
+          action: 'log',
+          message: '用户点击工厂介绍菜单项'
+        }, '*');
+      } else {
+        // 如果没有父窗口，直接跳转
+        window.location.href = 'factory-intro.html';
+      }
+    });
+
+    // 联系我们点击事件
+    contactItem.addEventListener('click', function() {
+      // 向父页面发送导航消息
+      if (window.parent) {
+        window.parent.postMessage({
+          action: 'navigate',
+          target: 'page/contact.html'
+        }, '*');
+        
+        // 添加日志消息
+        window.parent.postMessage({
+          action: 'log',
+          message: '用户点击联系我们菜单项'
+        }, '*');
+      } else {
+        // 如果没有父窗口，直接跳转
+        window.location.href = 'contact.html';
+      }
+    });
+  });
+</script>

@@ -533,3 +533,76 @@
   </script>
 </body>
 </html>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取URL参数
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryId = urlParams.get('category');
+    
+    // 根据分类ID加载产品数据
+    if (categoryId) {
+      loadProductsByCategory(categoryId);
+    } else {
+      loadAllProducts();
+    }
+    
+    function loadProductsByCategory(categoryId) {
+      // 这里添加根据分类ID加载产品的逻辑
+      console.log(`加载分类ID为 ${categoryId} 的产品`);
+      
+      // 示例：更新页面标题
+      const categoryName = getCategoryNameById(categoryId);
+      document.querySelector('.page-title').textContent = categoryName || '产品列表';
+    }
+    
+    function loadAllProducts() {
+      // 加载所有产品的逻辑
+      console.log('加载所有产品');
+    }
+    
+    function getCategoryNameById(categoryId) {
+      // 这里添加根据分类ID获取分类名称的逻辑
+      const categories = {
+        '1': '头层牛皮',
+        '2': '二层牛皮',
+        '3': '羊皮',
+        '4': '猪皮',
+        '5': 'PU革',
+        '6': '特殊工艺'
+      };
+      return categories[categoryId];
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 获取产品卡片
+    const productCards = document.querySelectorAll('.product-card');
+    
+    // 为每个产品卡片添加点击事件
+    productCards.forEach(card => {
+      card.addEventListener('click', function() {
+        // 获取产品ID
+        const productId = this.getAttribute('data-product-id');
+        
+        // 向父页面发送导航消息
+        if (window.parent) {
+          window.parent.postMessage({
+            action: 'navigate',
+            target: `page/product-detail.html?product=${productId}`
+          }, '*');
+          
+          // 添加日志消息
+          window.parent.postMessage({
+            action: 'log',
+            message: `用户点击了产品ID为 ${productId} 的卡片`
+          }, '*');
+        } else {
+          // 如果没有父窗口，直接跳转
+          window.location.href = `product-detail.html?product=${productId}`;
+        }
+      });
+    });
+  });
+</script>

@@ -301,5 +301,36 @@
     // 初始化 Lucide 图标
     lucide.createIcons();
   </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const categoryCards = document.querySelectorAll('.category-card');
+      
+      // 为每个分类卡片添加点击事件
+      categoryCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // 获取分类ID
+          const categoryId = this.getAttribute('data-category-id');
+          
+          // 向父页面发送导航消息
+          if (window.parent) {
+            window.parent.postMessage({
+              action: 'navigate',
+              target: `page/product-list.html?category=${categoryId}`
+            }, '*');
+            
+            // 添加日志消息
+            window.parent.postMessage({
+              action: 'log',
+              message: `用户点击了"${this.querySelector('.category-title').textContent}"分类卡片`
+            }, '*');
+          } else {
+            // 如果没有父窗口，直接跳转
+            window.location.href = `product-list.html?category=${categoryId}`;
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

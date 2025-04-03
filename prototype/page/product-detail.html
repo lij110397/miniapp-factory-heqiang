@@ -8,6 +8,77 @@
   <link href="../design-system/colors.css" rel="stylesheet">
   <link href="../design-system/spacing.css" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('product');
+      
+      function loadProductDetail(productId) {
+        // 这里添加根据产品ID加载产品详情的逻辑
+        console.log(`加载产品ID为 ${productId} 的详情`);
+        
+        // 示例：更新页面标题
+        const productName = getProductNameById(productId);
+        document.querySelector('.page-title').textContent = productName || '产品详情';
+      }
+      
+      function getProductNameById(productId) {
+        // 这里添加根据产品ID获取产品名称的逻辑
+        const products = {
+          '1': '头层牛皮 - 黑色',
+          '2': '头层牛皮 - 棕色',
+          '3': '二层牛皮 - 黑色',
+          '4': '二层牛皮 - 棕色',
+          '5': '羊皮 - 黑色',
+          '6': '羊皮 - 棕色'
+        };
+        return products[productId];
+      }
+      
+      function showError(message) {
+        // 显示错误信息
+        console.error(message);
+        alert(message);
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 获取URL参数
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('product');
+
+      
+      function loadProductDetail(productId) {
+        // 这里添加根据产品ID加载产品详情的逻辑
+        console.log(`加载产品ID为 ${productId} 的详情`);
+        
+        // 示例：更新页面标题
+        const productName = getProductNameById(productId);
+        document.querySelector('.page-title').textContent = productName || '产品详情';
+      }
+      
+      function getProductNameById(productId) {
+        // 这里添加根据产品ID获取产品名称的逻辑
+        const products = {
+          '1': '头层牛皮 - 黑色',
+          '2': '头层牛皮 - 棕色',
+          '3': '二层牛皮 - 黑色',
+          '4': '二层牛皮 - 棕色',
+          '5': '羊皮 - 黑色',
+          '6': '羊皮 - 棕色'
+        };
+        return products[productId];
+      }
+      
+      function showError(message) {
+        // 显示错误信息
+        console.error(message);
+        alert(message);
+      }
+    });
+  </script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -307,7 +378,7 @@
   <div class="pb-32">
     <!-- 返回按钮 -->
     <div class="absolute top-24 left-4 z-10">
-      <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white">
+      <button class="w-10 h-10 bg-black bg-opacity-20 rounded-full flex items-center justify-center text-white" id="backButton">
         <i data-lucide="chevron-left" class="w-6 h-6"></i>
       </button>
     </div>
@@ -479,6 +550,26 @@
     cartModal.addEventListener('click', function(e) {
       if (e.target === cartModal) {
         hideModal();
+      }
+    });
+    // 添加返回按钮点击事件
+    const backButton = document.getElementById('backButton');
+    backButton.addEventListener('click', function() {
+      // 向父页面发送返回消息
+      if (window.parent) {
+        window.parent.postMessage({
+          action: 'navigate',
+          target: 'page/product-list.html'
+        }, '*');
+        
+        // 添加日志消息
+        window.parent.postMessage({
+          action: 'log',
+          message: '用户点击返回按钮，返回产品列表'
+        }, '*');
+      } else {
+        // 如果没有父窗口，直接跳转
+        window.location.href = 'product-list.html';
       }
     });
   </script>

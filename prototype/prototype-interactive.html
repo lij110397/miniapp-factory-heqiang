@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>合强鞋材工厂小程序 - 交互原型</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="design-system/colors.css" rel="stylesheet">
+  <link href="design-system/spacing.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .phone-mockup {
+      width: 390px;
+      height: 844px;
+      background-color: #111;
+      border-radius: 44px;
+      padding: 14px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto; /* 添加水平居中 */
+    }
+    
+    /* 添加手机容器样式 */
+    .phone-container {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+    
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .phone-notch {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 30px;
+      background-color: #111;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
+      z-index: 10;
+    }
+    
+    .page-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--primary-700);
+    }
+    
+    .page-description {
+      font-size: 16px;
+      color: var(--neutral-600);
+      margin-bottom: 32px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      margin-top: 40px;
+      color: var(--primary-700);
+      border-left: 4px solid var(--primary-600);
+      padding-left: 12px;
+    }
+    
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .page-selector {
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .page-button {
+      background-color: var(--primary-600);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+    
+    .page-button:hover {
+      background-color: var(--primary-700);
+    }
+    
+    .page-button.active {
+      background-color: var(--primary-800);
+    }
+    
+    .controls {
+      margin-top: 20px;
+    }
+    
+    /* 添加底部导航栏样式 */
+    .tab-bar-container {
+      position: absolute;
+      bottom: 34px;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    
+    .tab-bar {
+      height: 83px;
+      background-color: white;
+      border-top: 1px solid #e5e7eb;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 8px;
+      cursor: pointer;
+      width: 25%;
+    }
+    
+    .tab-icon {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .tab-label {
+      font-size: 12px;
+      color: var(--neutral-500);
+    }
+    
+    .tab-item.active .tab-label {
+      color: var(--primary-600);
+    }
+    
+    .tab-item.active .tab-icon {
+      color: var(--primary-600);
+    }
+
+    .interaction-log {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 16px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .log-entry {
+      font-size: 14px;
+      padding: 4px 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+
+    .flow-card {
+      background-color: #f8fafc;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-left: 4px solid var(--primary-600);
+    }
+
+    .flow-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--primary-700);
+    }
+
+    .flow-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .flow-step {
+      background-color: var(--primary-100);
+      color: var(--primary-700);
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+    }
+
+    .flow-arrow {
+      color: var(--neutral-400);
+    }
+
+    .history-panel {
+      margin-top: 24px;
+    }
+
+    .history-title {
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body class="p-8">
+  <h1 class="page-title text-center">合强鞋材工厂小程序交互原型</h1>
+  <p class="page-description text-center">点击下方按钮切换不同页面，体验小程序交互流程。您也可以通过底部标签栏进行导航。</p>
+  
+  <!-- 页面导航按钮居中 -->
+  <div class="page-selector flex justify-center flex-wrap max-w-4xl mx-auto">
+    <div class="page-button active" data-page="page/home.html">首页</div>
+    <div class="page-button" data-page="page/category.html">产品分类</div>
+    <div class="page-button" data-page="page/product-list.html">产品列表</div>
+    <div class="page-button" data-page="page/product-detail.html">产品详情</div>
+    <div class="page-button" data-page="page/cart.html">采购车</div>
+    <div class="page-button" data-page="page/inquiry.html">询盘发送</div>
+    <div class="page-button" data-page="page/profile.html">个人中心</div>
+    <div class="page-button" data-page="page/login.html">登录注册</div>
+    <div class="page-button" data-page="page/factory-intro.html">工厂介绍</div>
+    <div class="page-button" data-page="page/contact.html">联系我们</div>
+  </div>
+  
+  <!-- 修改布局结构，将手机模拟器放在中间 -->
+  <div class="phone-container">
+    <div class="phone-mockup">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <iframe id="pageFrame" src="page/home.html"></iframe>
+        
+        <!-- 添加底部导航栏 -->
+        <div class="tab-bar-container">
+          <div class="tab-bar">
+            <div class="tab-item active" data-page="page/home.html">
+              <div class="tab-icon">
+                <i data-lucide="home" class="w-6 h-6"></i>
+              </div>
+              <div class="tab-label">首页</div>
+            </div>
+            <div class="tab-item" data-page="page/category.html">
+              <div class="tab-icon">
+                <i data-lucide="image" class="w-6 h-6"></i>
+              </div>
+              <div class="tab-label">产品图册</div>
+            </div>
+            <div class="tab-item" data-page="page/cart.html">
+              <div class="tab-icon">
+                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+              </div>
+              <div class="tab-label">采购车</div>
+            </div>
+            <div class="tab-item" data-page="page/profile.html">
+              <div class="tab-icon">
+                <i data-lucide="user" class="w-6 h-6"></i>
+              </div>
+              <div class="tab-label">我的</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- 交互指南部分放在手机下方 -->
+  <div class="max-w-4xl mx-auto mt-8">
+    <h2 class="text-lg font-medium mb-4 text-center">交互指南</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div>
+        <div class="flow-card">
+          <div class="flow-title">浏览产品流程</div>
+          <div class="flow-steps">
+            <div class="flow-step">首页</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">产品分类</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">产品列表</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">产品详情</div>
+          </div>
+        </div>
+        
+        <div class="flow-card">
+          <div class="flow-title">询盘流程</div>
+          <div class="flow-steps">
+            <div class="flow-step">产品详情</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">加入采购车</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">采购车</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">询盘发送</div>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="flow-card">
+          <div class="flow-title">了解工厂流程</div>
+          <div class="flow-steps">
+            <div class="flow-step">首页</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">工厂介绍</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">联系我们</div>
+          </div>
+        </div>
+        
+        <div class="history-panel">
+          <div class="history-title">
+            <i data-lucide="history" class="w-5 h-5"></i>
+            <span>交互历史记录</span>
+          </div>
+          <div class="interaction-log" id="interactionLog">
+            <div class="log-entry">加载页面: 首页</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-12 text-center text-gray-500 text-sm">
+    <p>© 2025 合强鞋材工厂小程序 | 使用 TailwindCSS构建</p>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const pageButtons = document.querySelectorAll('.page-button');
+      const tabItems = document.querySelectorAll('.tab-item');
+      const pageFrame = document.getElementById('pageFrame');
+      const interactionLog = document.getElementById('interactionLog');
+      
+      // 添加交互日志
+      function addLogEntry(message) {
+        const entry = document.createElement('div');
+        entry.className = 'log-entry';
+        entry.textContent = message;
+        interactionLog.appendChild(entry);
+        interactionLog.scrollTop = interactionLog.scrollHeight;
+      }
+      
+      // 顶部按钮点击事件
+      pageButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // 更新按钮状态
+          pageButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          // 更新iframe源
+          const pagePath = this.getAttribute('data-page');
+          const pageName = this.textContent;
+          pageFrame.src = pagePath;
+          
+          // 添加日志
+          addLogEntry(`导航到: ${pageName}`);
+          
+          // 同步更新底部导航状态
+          updateTabBarState(pagePath);
+        });
+      });
+      
+      // 底部导航点击事件
+      tabItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // 更新底部导航状态
+          tabItems.forEach(tab => tab.classList.remove('active'));
+          this.classList.add('active');
+          
+          // 更新iframe源
+          const pagePath = this.getAttribute('data-page');
+          const pageName = this.querySelector('.tab-label').textContent;
+          pageFrame.src = pagePath;
+          
+          // 添加日志
+          addLogEntry(`通过标签栏导航到: ${pageName}`);
+          
+          // 同步更新顶部按钮状态
+          updatePageButtonState(pagePath);
+        });
+      });
+      
+      // 更新底部导航状态
+      function updateTabBarState(pagePath) {
+        tabItems.forEach(tab => {
+          if (tab.getAttribute('data-page') === pagePath) {
+            tab.classList.add('active');
+          } else {
+            tab.classList.remove('active');
+          }
+        });
+      }
+      
+      // 更新顶部按钮状态
+      function updatePageButtonState(pagePath) {
+        pageButtons.forEach(btn => {
+          if (btn.getAttribute('data-page') === pagePath) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+      }
+      
+      // 添加消息监听，处理iframe内部页面发送的消息
+      window.addEventListener('message', function(event) {
+        if (event.data && event.data.action === 'navigate') {
+          // 根据消息中的目标页面进行导航
+          if (event.data.target) {
+            pageFrame.src = event.data.target;
+            
+            // 添加日志
+            const pageName = event.data.target.split('/').pop().replace('.html', '');
+            addLogEntry(`页面内交互: 导航到 ${pageName}`);
+            
+            // 同步更新顶部按钮和底部导航状态
+            updatePageButtonState(event.data.target);
+            updateTabBarState(event.data.target);
+          }
+        } else if (event.data && event.data.action === 'log') {
+          // 记录页面内的交互日志
+          if (event.data.message) {
+            addLogEntry(event.data.message);
+          }
+        }
+      });
+      
+      // 初始化Lucide图标
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
